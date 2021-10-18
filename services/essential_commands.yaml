@@ -1,0 +1,12 @@
+---
+- name:
+  apt:
+    name: ['htop', 'net-tools']
+    state: present
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: 
+  yum:
+    name: ['htop', 'net-tools']
+    state: present
+  when: ansible_facts['distribution'] == 'CentOS'

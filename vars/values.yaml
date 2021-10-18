@@ -1,0 +1,5 @@
+nginx: nginx # by default latest, for version use nginx=1.18*
+user: user_name
+password: user_password
+ssh_key_filename: ssh_key_file_name
+pemfile_path: pem_file_path

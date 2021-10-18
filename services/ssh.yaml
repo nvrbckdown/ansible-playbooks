@@ -1,0 +1,24 @@
+---
+- name: Generate ssh-key "{{ ssh_key_filename }}"
+  openssh_keypair:
+    path: "~/.ssh/{{ ssh_key_filename }}"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+
+- name: Copy ssh-key to authorized_keys
+  copy:
+    src: "~/.ssh/{{ ssh_key_filename }}.pub"
+    dest: "~/.ssh/authorized_keys"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0664
+    remote_src: yes
+    
+- name: Get .pem file from remote server
+  fetch:
+    src: "~/.ssh/{{ ssh_key_filename }}"
+    dest: "~/{{ pemfile_path }}/{{ ssh_key_filename}}.pem"
+    mode: 0400
+    flat: yes

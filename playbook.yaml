@@ -1,0 +1,40 @@
+---
+- name: Initial Configuration
+- hosts: web
+  become: yes
+  vars_files: vars/values.yml
+
+  tasks:
+    - name: Update Ubuntu cache 
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+      when: ansible_facts['distribution'] == 'Ubuntu'
+
+    - name: Update CentOS cache
+      yum:
+        update_cache: yes
+        cache_valid_time: 3600
+      when: ansible_facts['distribution'] == 'CentOS'
+
+    - name: Create a new user
+      user: 
+        name: "{{ user }}"
+        state: present
+        group: primary-group
+        groups: "sudo"
+        password: "{{ password }}"
+        comment: "sudoer"
+    
+    - name: Configure ssh-key
+      import_tasks: services/ssh.yaml
+
+    - name: Configure Nginx
+      import_tasks: services/nginx.yaml
+
+    - name: Configure essential commands
+      import_tasks: services/essential_commands.yaml
+
+    - name: Configure Docker
+      import_tasks: services/docker.yaml
+    

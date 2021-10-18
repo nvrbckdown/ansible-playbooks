@@ -1,0 +1,76 @@
+# INSTALL DOCKER ON UBUNTU OR CENTOS
+
+- name: Intall Docker on CentOS
+  remote_user: "{{ user }}"
+  block:
+  - name: Install pre-requisite packages
+    yum: name="{{item}}" state=latest
+    loop: [ yum-utils, device-mapper-persistent-data, lvm2 ] 
+
+  - name: Add Docker CE repo
+    remote_user: "{{ user }}"
+    get_url:
+      url: https://download.docker.com/linux/centos/docker-ce.repo
+      dest: /etc/yum.repos.d/docker-ce.repo
+
+  - name: Install Docker
+    remote_user: "{{ user }}"
+    yum: name=docker state=latest
+
+  - name: Install python-pip
+    remote_user: "{{ user }}"
+    yum: name=python-pip update_cache=yes state=present
+
+  - name: Install docker compose
+    remote_user: "{{ user }}"
+    pip: name=docker-compose state=present 
+
+  - name: Add users to the Docker group
+    remote_user: "{{ user }}"
+    user: name="{{ user }}" groups=docker append=yes
+
+  - name: Start and enable the Docker daemon
+    remote_user: "{{ user }}"
+    service: name=docker state=started enabled=yes
+  when: ansible_facts['distribution'] == 'CentOS'
+  ignore_error: true
+
+
+- name: Intall Docker on Ubuntu
+  block:
+  - name: Install aptitude using apt
+    remote_user: "{{ user }}"
+    apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+
+  - name: Install required system packages
+    apt: name={{ item }} state=latest update_cache=yes
+    loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common' ]
+
+  - name: Add Docker GPG apt Key
+    remote_user: "{{ user }}"
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker Repository
+    remote_user: "{{ user }}"
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu bionic stable
+      state: present
+
+  - name: Update apt and install docker-ce
+    remote_user: "{{ user }}"
+    apt: update_cache=yes name=docker-ce state=latest
+
+  - name: Add remote "ubuntu" user to "docker" group
+    remote_user: "{{ user }}"
+    user: name="{{ user }}" group="docker" append=yes
+
+  - name: Install docker-compose
+    remote_user: "{{ user }}"
+    get_url: 
+      url : https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: 'u+x,g+x'
+  when: ansible_facts['distribution'] == 'Ubuntu'
+

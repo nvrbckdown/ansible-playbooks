@@ -1,0 +1,7 @@
+web:
+  hosts:
+    server:
+  vars:
+    ansible_host: IP_ADDRESS 
+    ansible_user: root 
+    ansible_password: PASSWORD
