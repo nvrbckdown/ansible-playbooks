@@ -1,6 +1,16 @@
 # Server initial configuration with Ansible
- 
-## Feel the power of ANSIBLE PLAYBOOK!
+
+## Setup list
+- sudo user
+- ssh-key
+- nginx
+- htop
+- net-tools
+- docker
+- docker-compose
+
+## Works on Ubuntu and CentOS
+
 ---
 First. Write server cridentials to hosts.yaml
 
@@ -23,6 +33,11 @@ user: user_name
 password: user_password
 ssh_key_filename: ssh_key_file_name
 pemfile_path: pem_file_path # path where you want to save pem file on your local machine!
+
+# This vars will be only used if you need to create db and user
+db_user: db_user_name
+db_password: db_user_password
+db_name: db_name
 ```
 ---
 Third. Run ansible command

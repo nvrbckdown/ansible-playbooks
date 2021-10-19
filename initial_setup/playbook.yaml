@@ -1,8 +1,8 @@
 ---
 - name: Initial Configuration
-- hosts: web
+  hosts: web
   become: yes
-  vars_files: vars/values.yml
+  vars_files: vars/values.yaml
 
   tasks:
     - name: Update Ubuntu cache 
@@ -21,7 +21,7 @@
       user: 
         name: "{{ user }}"
         state: present
-        group: primary-group
+        group: sudo
         groups: "sudo"
         password: "{{ password }}"
         comment: "sudoer"
@@ -37,4 +37,7 @@
 
     - name: Configure Docker
       import_tasks: services/docker.yaml
+    
+    - name: Configure Postgresql
+      import_tasks: services/postgresql.yaml
     

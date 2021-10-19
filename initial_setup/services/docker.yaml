@@ -1,5 +1,5 @@
 # INSTALL DOCKER ON UBUNTU OR CENTOS
-
+---
 - name: Intall Docker on CentOS
   remote_user: "{{ user }}"
   block:
@@ -33,7 +33,6 @@
     remote_user: "{{ user }}"
     service: name=docker state=started enabled=yes
   when: ansible_facts['distribution'] == 'CentOS'
-  ignore_error: true
 
 
 - name: Intall Docker on Ubuntu

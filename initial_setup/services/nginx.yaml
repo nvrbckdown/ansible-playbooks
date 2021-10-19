@@ -4,19 +4,17 @@
       yum: name=epel-release state=present
 
     - name: Install nginx
-      yum: name="{{ variables.nginx }}" state=present
+      yum: name="{{ nginx }}" state=present
         
-    - name: Install nginx
+    - name: Restart nginx
       service: name=nginx state=restarted
   when: ansible_facts['distribution'] == 'CentOS'
-  ignore_errors: true
 
 - name: Nginx on Ubuntu
   block:
     - name: Install nginx webserver
-      apt: name="{{ variables.nginx }}" state=present
+      apt: name="{{ nginx }}" state=present
 
-    - name: Install nginx
+    - name: Restart nginx
       service: name=nginx state=restarted
   when: ansible_facts['distribution'] == 'Ubuntu'
-  ignore_errors: true
