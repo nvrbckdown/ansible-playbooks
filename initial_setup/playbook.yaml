@@ -41,3 +41,6 @@
     - name: Configure Postgresql
       import_tasks: services/postgresql.yaml
     
+  roles:
+    - ansible-role-oh-my-zsh
+    
