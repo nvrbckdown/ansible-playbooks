@@ -40,20 +40,6 @@ db_password: db_user_password
 db_name: db_name
 ```
 ---
-## You have to identify user in default/main.yaml for installation of oh-my-zsh role
-```bash
-users:
-  - username: NAME
-    oh_my_zsh:
-      theme: robbyrussell
-      plugins:
-        - git
-        - zsh-completions 
-        - zsh-syntax-highlighting 
-        - zsh-autosuggestions
-```
-Also you can add any other plugin to the list
----
 Third. Run ansible command
 ```bash
 # -i host.yaml means use this file as inventory file
