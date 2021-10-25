@@ -16,4 +16,4 @@ docker_check: false
 postgresql_check: false
 
 # Service is not ready
-mongo_check: false 
+mongo_check: false

@@ -48,8 +48,8 @@
       when: postgresql_check|bool == true
 
     # Not ready yet! 
-    # - name: Configure MongoDB "{{ mongo_check }}"
-    #   import_tasks: services/mongodb.yaml
-    #   when: mongo_check|bool == true
+    - name: Configure MongoDB "{{ mongo_check }}"
+      import_tasks: services/mongodb.yaml
+      when: mongo_check|bool == true
       
     
