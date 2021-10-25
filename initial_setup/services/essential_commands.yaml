@@ -1,12 +1,12 @@
 ---
 - name:
   apt:
-    name: ['htop', 'net-tools', 'ranger', 'net-tools', 'tree', 'ncdu', 'neofetch', 'vim', 'mosh', 'tmux', 'htop', 'git', 'curl', 'wget', 'unzip', 'zip', 'gcc', 'build-essential', 'make']
+    name: ['ranger', 'net-tools', 'tree', 'ncdu', 'neofetch', 'vim', 'mosh', 'tmux', 'htop', 'git', 'curl', 'wget', 'unzip', 'zip', 'gcc', 'build-essential', 'make']
     state: present
   when: ansible_facts['distribution'] == 'Ubuntu'
 
 - name: 
   yum:
-    name: ['htop', 'net-tools']
+    name: ['ranger', 'net-tools', 'tree', 'ncdu', 'neofetch', 'vim', 'mosh', 'tmux', 'htop', 'git', 'curl', 'wget', 'unzip', 'zip', 'gcc', 'build-essential', 'make']
     state: present
   when: ansible_facts['distribution'] == 'CentOS'
