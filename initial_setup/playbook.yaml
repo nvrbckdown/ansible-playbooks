@@ -17,7 +17,7 @@
         cache_valid_time: 3600
       when: ansible_facts['distribution'] == 'CentOS'
 
-    - name: Create a new user
+    - name: Create a new user {{ user_check }}
       user: 
         name: "{{ user }}"
         state: present
@@ -25,20 +25,26 @@
         groups: "sudo"
         password: "{{ password }}"
         comment: "sudoer"
+      when: user_check|bool == true
     
-    - name: Configure ssh-key
+    - name: Configure ssh-key {{ ssh_key_check }}
       import_tasks: services/ssh.yaml
+      when: ssh_key_check|bool == true
 
-    - name: Configure Nginx
+    - name: Configure Nginx {{ nginx_check }}
       import_tasks: services/nginx.yaml
+      when: nginx_check|bool == true
 
-    - name: Configure essential commands
+    - name: Configure essential commands {{ es_commands_check }}
       import_tasks: services/essential_commands.yaml
+      when: es_commands_check|bool == true
 
-    - name: Configure Docker
+    - name: Configure Docker {{ docker_check }}
       import_tasks: services/docker.yaml
+      when: docker_check|bool == true
     
-    - name: Configure Postgresql
+    - name: Configure Postgresql {{ postgresql_check }}
       import_tasks: services/postgresql.yaml
+      when: postgresql_check|bool == true
       
     

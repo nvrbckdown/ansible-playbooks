@@ -7,3 +7,10 @@ pemfile_path: path_on_your_machine
 db_user: db_user_name
 db_password: db_user_password
 db_name: db_name
+
+user_check: false
+ssh_key_check: false
+nginx_check: false
+es_commands_check: false
+docker_check: false
+postgresql_check: false
