@@ -1,5 +1,5 @@
 nginx: nginx # by default latest, for version use nginx=1.18*
-user: sharqtv
+user: user_name
 password: user_password
 ssh_key_filename: ssh_file_name
 pemfile_path: path_on_your_machine
@@ -14,3 +14,6 @@ nginx_check: false
 es_commands_check: false
 docker_check: false
 postgresql_check: false
+
+# Service is not ready
+mongo_check: false 

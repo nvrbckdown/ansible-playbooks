@@ -4,7 +4,7 @@
   remote_user: "{{ user }}"
   block:
   - name: Install pre-requisite packages
-    yum: name="{{item}}" state=latest
+    yum: name="{{ item }}" state=latest
     loop: [ yum-utils, device-mapper-persistent-data, lvm2 ] 
 
   - name: Add Docker CE repo

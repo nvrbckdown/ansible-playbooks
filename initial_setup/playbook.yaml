@@ -43,8 +43,13 @@
       import_tasks: services/docker.yaml
       when: docker_check|bool == true
     
-    - name: Configure Postgresql {{ postgresql_check }}
+    - name: Configure Postgresql "{{ postgresql_check }}"
       import_tasks: services/postgresql.yaml
       when: postgresql_check|bool == true
+
+    # Not ready yet! 
+    # - name: Configure MongoDB "{{ mongo_check }}"
+    #   import_tasks: services/mongodb.yaml
+    #   when: mongo_check|bool == true
       
     

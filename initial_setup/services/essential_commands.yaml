@@ -1,11 +1,11 @@
 ---
-- name:
+- name: Install essential commands on Ubuntu
   apt:
     name: ['ranger', 'net-tools', 'tree', 'ncdu', 'neofetch', 'vim', 'mosh', 'tmux', 'htop', 'git', 'curl', 'wget', 'unzip', 'zip', 'gcc', 'build-essential', 'make']
     state: present
   when: ansible_facts['distribution'] == 'Ubuntu'
 
-- name: 
+- name: Install essential commands on CentOS
   yum:
     name: ['ranger', 'net-tools', 'tree', 'ncdu', 'neofetch', 'vim', 'mosh', 'tmux', 'htop', 'git', 'curl', 'wget', 'unzip', 'zip', 'gcc', 'build-essential', 'make']
     state: present
