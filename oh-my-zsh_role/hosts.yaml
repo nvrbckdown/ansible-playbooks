@@ -2,7 +2,7 @@ web:
   hosts:
     server:
   vars:
-    ansible_host: 13.49.105.1
-    ansible_user: ubuntu
-    ansible_ssh_private_key_file: ~/Workspace/Kubernetes/SharqTV/sharqtv_new.pem # if you have
-    # ansible_password: ezD3d7BHLvQV3Bqt # if you use pem key comment password! 
+    ansible_host: IP ADDRESS
+    ansible_user: USER
+    ansible_ssh_private_key_file: PATH # if you have
+    ansible_password: PASSWORD # if you use pem key comment password! 
