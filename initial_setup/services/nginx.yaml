@@ -14,8 +14,12 @@
 - name: Nginx on Ubuntu
   block:
     - name: Install nginx webserver
-      apt: name="{{ nginx }}" state=present
+      apt: 
+        name: ['nginx', 'certbot', 'python3-certbot-nginx'] 
+        state: present
 
     - name: Restart nginx
       service: name=nginx state=restarted
   when: ansible_facts['distribution'] == 'Ubuntu'
+
+
