@@ -1,0 +1,5 @@
+---
+plugins:
+    - zsh-autosuggestions
+    - zsh-completions
+    - zsh-syntax-highlighting # you have to clone it manually (Have no idea why it does not cloning)

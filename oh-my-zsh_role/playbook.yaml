@@ -2,8 +2,18 @@
 - name: Initial Configuration
   hosts: web
   become: yes
+  vars_files: vars.yaml
 
   roles:
     - ansible-role-oh-my-zsh
+  
+  tasks:
+    - name: Install Plugins
+      ansible.builtin.git:
+        repo: 'https://github.com/zsh-users/{{ item }}.git'
+        dest: ~/{{ ansible_user }}/.oh-my-zsh/plugins/
+        version: master
+      loop: '{{ plugins }}'
+
       
     
