@@ -1,0 +1,9 @@
+---
+- name: Initial Configuration
+  hosts: web
+  become: yes
+
+  roles:
+    - ansible-role-oh-my-zsh
+      
+    
