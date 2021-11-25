@@ -2,10 +2,9 @@ web:
   hosts:
     server:
   vars:
-    ansible_host: 165.227.139.241
-    ansible_ssh_user: girgitton-prod
-    ansible_port: 30022
-    ansible_ssh_private_key_file: ~/Workspace/Kubernetes/GG/girgitton.pem # if you have
+    ansible_host:
+    ansible_ssh_user:
+    ansible_port: 
+    ansible_ssh_private_key_file: # if you have
     # ansible_password: X58E5U7SuJpUCMpu # if you use pem key comment password! 
-    ansible_sudo_pass: X58E5U7SuJpUCMpu
-    ansible_python_interpreter: /usr/bin/python3
+    ansible_sudo_pass: 
