@@ -1,8 +1,7 @@
 web:
   hosts:
     server:
-  vars:
-    ansible_host: IP
-    ansible_user: user
-    ansible_ssh_private_key_file: path # if you have
-    ansible_password: password # if you use pem key comment password! 
+      ansible_host: IP
+      ansible_user: USERNAME
+      ansible_ssh_private_key_file: PEM-KEY_PATH # if you have
+      ansible_password: PASSWORD # if you use pem key comment password!

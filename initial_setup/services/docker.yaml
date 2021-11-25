@@ -63,7 +63,7 @@
 
   - name: Add remote "ubuntu" user to "docker" group
     remote_user: "{{ user }}"
-    user: name="{{ user }}" group="docker" append=yes
+    user: name="{{ ansible_user }}" group="docker" append=yes
 
   - name: Install docker-compose
     remote_user: "{{ user }}"

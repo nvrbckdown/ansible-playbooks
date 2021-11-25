@@ -11,7 +11,7 @@
     - name: Install Plugins
       ansible.builtin.git:
         repo: 'https://github.com/zsh-users/{{ item }}.git'
-        dest: ~/{{ ansible_user }}/.oh-my-zsh/plugins/
+        dest: ~/.oh-my-zsh/plugins
         version: master
       loop: '{{ plugins }}'
 

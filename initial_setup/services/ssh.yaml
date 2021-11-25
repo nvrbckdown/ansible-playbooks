@@ -1,12 +1,15 @@
 ---
-- name: Generate ssh-key "{{ ssh_key_filename }}"
-  openssh_keypair:
-    path: "~/.ssh/{{ ssh_key_filename }}"
-    type: rsa
-    size: 4096
-    state: present
+- name: Generate sshkey for {{ user }} 
+  user:
+    name: "{{ user }}" 
+    generate_ssh_key: yes
+    ssh_key_type: rsa
+    ssh_key_bits: 4096
+    ssh_key_file: ".ssh/{{ ssh_key_filename }}"
     force: no
-
+  become: yes
+  become_user: "{{ user }}"
+  
 - name: Copy ssh-key to authorized_keys
   copy:
     src: "~/.ssh/{{ ssh_key_filename }}.pub"
@@ -15,6 +18,8 @@
     group: "sudo"
     mode: 0664
     remote_src: yes
+  become: yes
+  become_user: "{{ user }}"
     
 - name: Get .pem file from remote server
   fetch:
@@ -22,3 +27,5 @@
     dest: "~/{{ pemfile_path }}/{{ ssh_key_filename}}.pem"
     mode: 0400
     flat: yes
+  become: yes
+  become_user: "{{ user }}"
