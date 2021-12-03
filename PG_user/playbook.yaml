@@ -5,14 +5,14 @@
   vars_files: vars.yaml
 
   tasks:
-  - name: "Create app database"
+  - name: "Create {{ db_name }} database"
     postgresql_db:
       state: present
       name: "{{ db_name }}"
     # become: yes
     become_user: postgres
 
-  - name: "Create db user"
+  - name: "Create {{ db_name }} {{ db_user }} with {{ db_password }}"
     postgresql_user:
       state: present
       name: "{{ db_user }}"
@@ -20,7 +20,7 @@
     # become: yes
     become_user: postgres
 
-  - name: "Grant db user access to app db"
+  - name: "Grant db {{ db_user }} access to {{ db_name }} db"
     postgresql_privs:
       type: database
       database: "{{ db_name }}"
