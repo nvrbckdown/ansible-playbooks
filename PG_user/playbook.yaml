@@ -2,13 +2,14 @@
 - name: Create PG Database and User
   hosts: web
   become: yes
+  vars_files: vars.yaml
 
   tasks:
   - name: "Create app database"
     postgresql_db:
       state: present
       name: "{{ db_name }}"
-    become: yes
+    # become: yes
     become_user: postgres
 
   - name: "Create db user"
@@ -16,7 +17,7 @@
       state: present
       name: "{{ db_user }}"
       password: "{{ db_password }}"
-    become: yes
+    # become: yes
     become_user: postgres
 
   - name: "Grant db user access to app db"
@@ -24,20 +25,9 @@
       type: database
       database: "{{ db_name }}"
       roles: "{{ db_user }}"
-      objs: ALL_IN_SCHEMA
-      privs: SELECT, INSERT, UPDATE, DELETE, SUPERUSER
-    become: yes
+      privs: ALL
+    # become: yes
     become_user: postgres
 
-  - name: "Allow md5 connection for the db user"
-    postgresql_pg_hba:
-      dest: "~/data/pg_hba.conf"
-      contype: host
-      databases: all
-      method: md5
-      users: "{{ db_user }}"
-      create: true
-    become: yes
-    become_user: postgres
       
     

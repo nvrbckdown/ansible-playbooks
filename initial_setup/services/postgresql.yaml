@@ -42,6 +42,7 @@
         - openssl
         - libssl-dev
         - libssl-doc
+        - python3-psycopg2
       tags: packages
 
     - name: Install PostgreSQL

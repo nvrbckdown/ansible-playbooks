@@ -2,9 +2,8 @@ web:
   hosts:
     server:
   vars:
-    ansible_host:
+    ansible_host: 
     ansible_ssh_user:
     ansible_port: 
     ansible_ssh_private_key_file: # if you have
-    # ansible_password: X58E5U7SuJpUCMpu # if you use pem key comment password! 
-    ansible_sudo_pass: 
+    ansible_password: # if you use pem key comment password!  
