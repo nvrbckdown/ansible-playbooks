@@ -1,0 +1,34 @@
+services:
+  - name: gitlab.udevs.io:5050/docker/docker:dind
+    alias: docker
+
+before_script:
+  ## docker login
+  - docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password $CI_REGISTRY_PASSWORD
+  ## install dependencies
+  - apk update && apk --no-cache --update add build-base openssh curl
+
+stages:
+  - build
+  - deploy
+
+build-image:
+  stage: build
+  script:
+    - make build-image REGISTRY=$CI_REGISTRY PROJECT_NAME=$CI_PROJECT_NAMESPACE APP=$CI_PROJECT_NAME TAG=$CI_PIPELINE_IID
+    - make push-image REGISTRY=$CI_REGISTRY PROJECT_NAME=$CI_PROJECT_NAMESPACE APP=$CI_PROJECT_NAME TAG=$CI_PIPELINE_IID
+  only:
+    - master
+
+deploy-prod:
+  stage: deploy
+  before_script:
+    - eval $(ssh-agent -s)
+    - echo "$GITLAB_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script:
+    - ssh -o StrictHostKeyChecking=no ${{ PROJECT_SERVER_USER }}@{{ PROJECT_SERVER_HOST }} -p ${{ PROJECT_SERVER_PORT }} 'docker service update --with-registry-auth
+      --image '$CI_REGISTRY'/'$CI_PROJECT_NAMESPACE'/'$CI_PROJECT_NAME':'$CI_PIPELINE_IID' '$CI_PROJECT_NAME''
+  only:
+    - master

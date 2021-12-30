@@ -17,12 +17,17 @@
         cache_valid_time: 3600
       when: ansible_facts['distribution'] == 'CentOS'
 
-    - name: Create a new user {{ user_check }}
+    - name: Create a group of user {{ user }} {{ user_check }}
+      ansible.builtin.group:
+        name: "{{ user }}"
+        state: present
+
+    - name: Create a new user {{ user }} {{ user_check }}
       user: 
         name: "{{ user }}"
         state: present
-        group: sudo
-        groups: "sudo"
+        group: "{{ user }}"
+        groups: "{{ user }}, sudo"
         password: "{{ password }}"
         comment: "sudoer"
       when: user_check|bool == true

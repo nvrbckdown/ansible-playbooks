@@ -1,0 +1,26 @@
+---
+- name: "Templating CI"
+  hosts: localhost
+  connection: local
+  vars_files: vars/vars.yaml
+
+  tasks:
+  - name: .gitlab-ci.yaml file
+    template: 
+      src: "./templates/kubernetes/.gitlab-ci-kubernetes.j2" 
+      dest: "{{ service_folder }}/.gitlab-ci.yaml"
+
+  - name: dockerfile file
+    copy: 
+      src: "./templates/kubernetes/Dockerfile-node.j2" 
+      dest: "{{ service_folder }}/Dockerfile"
+  
+  - name: Makefile copy
+    copy: 
+      src: "./templates/kubernetes/Makefile" 
+      dest: "{{ service_folder }}/Makefile"
+
+  - name: .build_info file
+    template: 
+      src: "./templates/kubernetes/.build_info.j2" 
+      dest: "{{ service_folder }}/.build_info"

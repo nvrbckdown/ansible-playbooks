@@ -1,0 +1,9 @@
+service_folder: # path
+kube_config_staging: SAFIA_TEST
+kube_config_master: SAFIA_KUBECONFIG
+deployment_name:  # .build_info
+
+# Dockerfile for golang service
+PROJECT_NAME:
+SERVICE_NAME:
+

@@ -1,0 +1,20 @@
+FROM node:alpine as builder
+RUN apk update && apk add yarn
+
+RUN mkdir app
+WORKDIR app
+
+
+COPY package*.json ./
+
+COPY . ./
+RUN rm -rf .env.dev
+
+RUN npm install
+RUN npm run-script build
+
+
+ENV NODE_ENV=production
+ENV REACT_APP_HOST=0.0.0.0
+
+ENTRYPOINT ["npm", "start"]
