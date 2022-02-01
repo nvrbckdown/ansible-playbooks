@@ -14,7 +14,7 @@ oh_my_zsh_plugins:
 oh_my_zsh_install: yes
 
 users:
-  - username: webdev
+  - username: sharqtv
     oh_my_zsh:
       theme: robbyrussell
       plugins:

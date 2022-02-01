@@ -1,12 +1,7 @@
 web:
   hosts:
-    transcoder-server:
-      ansible_host: 217.29.116.235
-      ansible_user: webdev
-      # ansible_ssh_private_key_file: ~/Workspace/Kubernetes/SharqTV/sharq_mon.pem # if you have
-      ansible_password: $hARjTp0w3r # if you use pem key comment password!
-    storage-server:
-      ansible_host: 217.29.116.236
-      ansible_user: webdev
-      # ansible_ssh_private_key_file: ~/Workspace/Kubernetes/SharqTV/sharq_mon.pem # if you have
-      ansible_password: $hARjTp0w3r # if you use pem key comment password!
+    server:
+      ansible_host: 82.148.5.98
+      ansible_user: root
+      ansible_ssh_private_key_file: ~/Workspace/Kubernetes/SharqTV/sharqtv.pem # if you have
+      # ansible_password: waiXeH3esoh9eech  # if you use pem key comment password!

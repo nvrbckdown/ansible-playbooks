@@ -1,7 +1,7 @@
 nginx: nginx # by default latest, for version use nginx=1.18*
-user: webdev
-password: 123321
-ssh_key_filename: sharqtv_new
+user: sharqtv
+password: jeiquof9Aingahsu
+ssh_key_filename: sharqtv
 pemfile_path: ~/Workspace/Kubernetes/SharqTV
 
 db_user: db_user_name
