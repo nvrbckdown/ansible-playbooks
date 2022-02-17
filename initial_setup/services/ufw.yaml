@@ -1,0 +1,31 @@
+---
+- name: Allow everything and enable UFW
+  ufw:
+    state: enabled
+    policy: allow
+
+- name: Limit ssh connection
+  ufw:
+    rule: limit
+    port: "{{ SSH_PORT }}"
+    proto: tcp
+
+- name: Allow standart ports
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  loop:
+      - '80'
+      - '443'
+
+- name: Stop and Start ssh
+  service:
+    name: ssh
+    state: restarted
+
+- name: Deny any other
+  ufw:
+    state: enabled
+    policy: deny
+

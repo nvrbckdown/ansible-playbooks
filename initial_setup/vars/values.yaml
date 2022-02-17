@@ -1,13 +1,20 @@
 nginx: nginx # by default latest, for version use nginx=1.18*
-user: sharqtv
-password: jeiquof9Aingahsu
-ssh_key_filename: sharqtv
-pemfile_path: ~/Workspace/Kubernetes/SharqTV
+user: 
+password: 
+ssh_key_filename: 
+pemfile_path: 
 
 db_user: db_user_name
 db_password: db_user_password
 db_name: db_name
 
+# SECURITY
+# SSH configuration file (sshd_config)
+SSH_PORT: 22                  # default 22
+PERMIT_ROOT_LOGIN: "yes"         # yes/no (default yes)
+PASS_AUTH: "yes"                  # PasswordAuthentification (default yes)
+
+zsh_check: false
 user_check: false
 ssh_key_check: false
 nginx_check: false
@@ -17,3 +24,4 @@ postgresql_check: false
 
 # Service is not ready
 mongo_check: false
+

@@ -1,7 +1,7 @@
 ---
 - name: Initial Configuration
   hosts: web
-  become: yes
+  become: true
   vars_files: vars/values.yaml
 
   tasks:
@@ -21,14 +21,16 @@
       ansible.builtin.group:
         name: "{{ user }}"
         state: present
+      when: user_check|bool == true
 
     - name: Create a new user {{ user }} {{ user_check }}
       user: 
         name: "{{ user }}"
         state: present
         group: "{{ user }}"
-        groups: "{{ user }}, sudo"
-        password: "{{ password }}"
+        groups: "sudo"
+        password: "{{ password | password_hash ('sha512') }}"
+        update_password: on_create
         comment: "sudoer"
       when: user_check|bool == true
     
@@ -52,9 +54,28 @@
       import_tasks: services/postgresql.yaml
       when: postgresql_check|bool == true
 
+    - name: Doing Check for some1
+      import_role:
+        name: ansible-role-oh-my-zsh
+      when: zsh_check|bool==true
+    
+    - name: Install Plugins
+      ansible.builtin.git:
+        repo: 'https://github.com/zsh-users/{{ item }}.git'
+        dest: /home/{{ user }}/.oh-my-zsh/plugins
+        version: master
+      loop: 
+        - git
+        - zsh-completions
+        - zsh-syntax-highlighting 
+        - zsh-autosuggestions
+      when: zsh_check|bool==true
+
+    - name: Enable and configure UFW
+      include_tasks: services/ufw.yaml
+
+    
     # Not ready yet! 
     - name: Configure MongoDB "{{ mongo_check }}"
       import_tasks: services/mongodb.yaml
       when: mongo_check|bool == true
-      
-    
