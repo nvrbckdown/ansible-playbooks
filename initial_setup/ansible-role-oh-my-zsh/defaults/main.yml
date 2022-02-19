@@ -14,7 +14,7 @@ oh_my_zsh_plugins:
 oh_my_zsh_install: yes
 
 users:
-  - username: ansible
+  - username: USERNAME
     oh_my_zsh:
       theme: robbyrussell
       plugins:

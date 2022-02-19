@@ -1,8 +1,8 @@
 nginx: nginx # by default latest, for version use nginx=1.18*
-user: 
+user: ubuntu
 password: 
-ssh_key_filename: 
-pemfile_path: 
+ssh_key_filename: "{{ ansible_hostname }}"
+pemfile_path: /
 
 db_user: db_user_name
 db_password: db_user_password
